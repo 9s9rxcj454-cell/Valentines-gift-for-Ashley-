@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine, Ashley!</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: pink;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    h1, h2 {
+      color: red;
+      margin-top: 30px;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 15px 30px;
+      margin: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #flowers, .animal {
+      position: absolute;
+      pointer-events: none;
+      font-size: 2em;
+    }
+
+    .hidden { display: none; }
+
+    img { max-width: 200px; margin: 10px; border-radius: 15px; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    .flower {
+      animation: float 5s linear infinite;
+    }
+
+    .animal {
+      animation: float 8s linear infinite;
+    }
+
+    video {
+      max-width: 400px;
+      margin-top: 20px;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hey Ashley Musonda! 💖</h1>
+  <p>Will you be my Valentine? 😳</p>
+  <button id="yesBtn">Yes 😍</button>
+  <button id="noBtn">No 😢</button>
+
+  <!-- Memories section -->
+  <div id="memory1" class="hidden">
+    <h2>Yay! 🎉</h2>
+    <p>Remember the first day we started talking when you inboxed me on TikTok? 😄</p>
+    <img src="https://i.imgur.com/ZXQf5gz.png" alt="Cute heart">
+    <button id="next1">Continue ➡️</button>
+  </div>
+
+  <div id="memory2" class="hidden">
+    <p>That was the best day of my life 🥰</p>
+    <div class="animal" id="animal1">🐶</div>
+    <button id="next2">Continue ➡️</button>
+  </div>
+
+  <div id="memory3" class="hidden">
+    <p>Been with you for 8 months, and this is our first Valentine together! ❤️</p>
+    <button id="next3">Continue ➡️</button>
+  </div>
+
+  <div id="final" class="hidden">
+    <h2>I love you, Ashley Musonda 💐</h2>
+    <p>Here's a funny cute video for you! 😄</p>
+    <video controls autoplay loop>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Floating flowers -->
+  <div id="flowers"></div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const memory1 = document.getElementById('memory1');
+    const memory2 = document.getElementById('memory2');
+    const memory3 = document.getElementById('memory3');
+    const final = document.getElementById('final');
+    const next1 = document.getElementById('next1');
+    const next2 = document.getElementById('next2');
+    const next3 = document.getElementById('next3');
+    const flowersDiv = document.getElementById('flowers');
+    const animal1 = document.getElementById('animal1');
+
+    // Flower animation
+    function createFlower() {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.style.left = Math.random() * window.innerWidth + 'px';
+      flower.style.fontSize = 20 + Math.random() * 30 + 'px';
+      flower.innerText = '🌸';
+      flowersDiv.appendChild(flower);
+      setTimeout(() => flower.remove(), 5000);
+    }
+    setInterval(createFlower, 500);
+
+    // Animal animation
+    function animateAnimal() {
+      const x = Math.random() * (window.innerWidth - 50);
+      const y = Math.random() * (window.innerHeight - 50);
+      animal1.style.left = x + 'px';
+      animal1.style.top = y + 'px';
+    }
+    setInterval(animateAnimal, 1000);
+
+    // Yes button
+    yesBtn.addEventListener('click', () => {
+      memory1.classList.remove('hidden');
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+    });
+
+    // No button - run away effect
+    noBtn.addEventListener('mouseenter', () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    });
+
+    // Continue buttons
+    next1.addEventListener('click', () => {
+      memory1.style.display = 'none';
+      memory2.classList.remove('hidden');
+    });
+
+    next2.addEventListener('click', () => {
+      memory2.style.display = 'none';
+      memory3.classList.remove('hidden');
+    });
+
+    next3.addEventListener('click', () => {
+      memory3.style.display = 'none';
+      final.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
